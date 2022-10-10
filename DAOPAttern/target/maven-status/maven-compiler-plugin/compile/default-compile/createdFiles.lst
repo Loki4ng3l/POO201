@@ -1,0 +1,4 @@
+data/conexion.class
+domain/persona.class
+data/personaDAO.class
+test/TestPersonaDAO.class

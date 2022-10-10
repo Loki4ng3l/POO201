@@ -1,0 +1,7 @@
+domain\rectangulo.class
+domain\figuraGeometrica.class
+domain\circulo.class
+test\pruebaFigura.class
+domain\triangulo.class
+domain\cubo.class
+domain\cuadrado.class
