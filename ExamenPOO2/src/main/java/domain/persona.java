@@ -1,5 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package domain;
 
+/**
+ *
+ * @author pepe
+ */
 public class persona {
     private int id;
     private String nombre;
@@ -10,6 +18,7 @@ public class persona {
     private String fechaNac;
     private int edad;
     private String rfc;
+    
     
     //Constructor
     public persona(int id, String nombre, String apellidoP, String apellidoM, String email, String telefono, String fechaNac, int edad, String rfc) {
@@ -24,7 +33,26 @@ public class persona {
         this.rfc = rfc;
     }
     
-    //G&S
+    public persona(String nombre, String apellidoP, String apellidoM, String email, String telefono, String fechaNac, int edad, String rfc) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaNac = fechaNac;
+        this.edad = edad;
+        this.rfc = rfc;
+    }
+    
+    public persona(int id){
+        this.id = id;
+    }
+    
+    public persona(){
+        
+    }
+
+    // Getter && Setter
     public int getId() {
         return id;
     }
@@ -96,4 +124,45 @@ public class persona {
     public void setRfc(String rfc) {
         this.rfc = rfc;
     }
+    
+    private String espacioNombre;
+    private String espacioApellidoP;
+    private String espacioApellidoM;
+    private int caracteresApellidoP;
+    private int caracteresApellidoM;
+   
+    //private int caracteresNombre = id.length();
+    
+    // toString
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(id);
+        sb.append("\t");
+        sb.append(nombre);
+        sb.append("     ");
+        sb.append("\t");
+        sb.append(apellidoP);
+        sb.append("     ");
+        sb.append("\t");
+        sb.append(apellidoM);
+        sb.append("     ");
+        sb.append("\t");
+        sb.append(email);
+        sb.append("     ");
+        sb.append("\t");
+        sb.append(telefono);
+        sb.append("\t");
+        sb.append(fechaNac);
+        sb.append("\t");
+        sb.append(" ");
+        sb.append(edad);
+        sb.append(" ");
+        sb.append("\t");
+        sb.append(rfc);
+        sb.append("\t");
+        return sb.toString();
+    }
+    
 }
+
