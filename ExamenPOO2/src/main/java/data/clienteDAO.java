@@ -23,6 +23,7 @@ public class clienteDAO {
     private static final String SQL_UPDATE="UPDATE cliente SET nombre = ?, apellidoP = ?, apellidoM = ?, email = ?, telefono=?, fechaNac=?, edad=?, rfc = ?, diasCredito = ?, metodoPago = ?, tipoPersona = ? WHERE id = ?";
     private static final String SQL_DELETE="DELETE FROM cliente WHERE id = ?";
     
+    
     // Seleccionar
     public List<cliente> seleccionar(){
         Connection conn = null;

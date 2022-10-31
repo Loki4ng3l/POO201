@@ -24,6 +24,9 @@ public class empleadoDAO {
     private static final String SQL_UPDATE="UPDATE empleado SET nombre = ?, apellidoP = ?, apellidoM = ?, email = ?, telefono=?, fechaNac=?, edad=?, rfc = ?, NSS = ?, curp = ?, antiguedad = ?, puesto = ? WHERE id = ?";
     private static final String SQL_DELETE="DELETE FROM empleado WHERE id = ?";
     
+    
+    // INSERT INTO empleados(edad) VALUES (truncate((datediff(current_date(), FechaNac) /365),0));  
+    
     private String saltoLinea;
     
     // Seleccionar
@@ -114,6 +117,7 @@ public class empleadoDAO {
         
         return registros;
     }
+    
     
     //Actualizar
     public int actualizar(empleado empleado){

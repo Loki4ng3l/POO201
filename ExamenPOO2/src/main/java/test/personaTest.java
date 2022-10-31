@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package test;
 
 import data.empleadoDAO;
@@ -13,11 +9,12 @@ import domain.proveedor;
 import domain.persona;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author pepe
- */
 public class personaTest {
     static int opcionSQL = 0;
     static int menu;
@@ -62,7 +59,7 @@ public class personaTest {
     }
     
     public static boolean ValidarEmail(String email) {
-    return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+$");
     }
     
     public static boolean ValidarFechaNac(String datos){
@@ -113,7 +110,6 @@ public class personaTest {
         return datos.matches("[1-2]{1}");
     }
        
-    
     
     public static void Mostrarmenu(){
         try {
@@ -223,7 +219,7 @@ public class personaTest {
     
     public static void RegistroTelefono(){
         try {
-            System.out.println("Ingrese el teléfono:");
+            System.out.println("Ingrese el teléfono (10 numeros):");
             Scanner ee = new Scanner(System.in);
             telefono = ee.nextLine();
             if(!ValidarTelefono(telefono)){
@@ -234,14 +230,14 @@ public class personaTest {
                 System.out.println("teléfono valido");
             }
         } catch (Exception e) {
-            System.out.println("Ingresa un número valido por favor");
+            System.out.println("Ingresa un teléfono valido (10 numeros) por favor");
             RegistroTelefono();
         }
     }
     
     public static void RegistroFechaNac(){
         try {
-            System.out.println("Ingrese la fecha de Nacimiento:");
+            System.out.println("Ingrese la fecha de Nacimiento en el formato yyyy/mm/dd :");
             Scanner ff = new Scanner(System.in);
             fechaNac = ff.nextLine();
             if(!ValidarFechaNac(fechaNac)){
@@ -253,10 +249,11 @@ public class personaTest {
             }
         } catch (Exception e) {
             System.out.println("Ingresa una fecha de nacimiento valida (yyyy/mm/dd) por favor");
-            RegistroTelefono();
+            RegistroFechaNac();
         }
     }
       
+    /*
     public static void RegistroEdad(){
         try {
             System.out.println("Ingrese la edad:");
@@ -275,9 +272,44 @@ public class personaTest {
         }
     }
     
+    public static void RegistroEdad(){
+        try {
+            Calendar fechaNacimiento = new GregorianCalendar(LocalDate.parse(fechaNac));
+            Calendar fechaHoy = Calendar.getInstance();
+            int anoNac = fechaNacimiento.get(Calendar.YEAR);
+            int anoHoy = fechaHoy.get(Calendar.YEAR);
+            int edad = anoHoy - anoNac;
+            System.out.println("Tu edad es de: "+ edad);
+            
+        } catch (Exception e) {
+            System.out.println("Ingresa una edad por favor");
+            RegistroEdad();
+        }
+    }
+    
+    */
+    
+    public static void RegistroEdad(){
+        try {
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDate fechaNacimiento = LocalDate.parse(fechaNac, formatoFecha);
+
+            LocalDate fechaAct = LocalDate.now();
+
+            Period periodo = Period.between(fechaNacimiento, fechaAct);
+            System.out.printf("Tu edad es de: " + periodo.getYears());
+            edad = periodo.getYears();
+            
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println("No se que poner");
+        }
+    }
+    
+    
     public static void RegistroRfc(){
         try {
-            System.out.println("Ingrese el rfc:");
+            System.out.println("Ingrese el rfc (13 caracteres, solo mayúsculas y numeros):");
             Scanner hh = new Scanner(System.in);
             rfc = hh.nextLine();
             if(!ValidarRfc(rfc)){
@@ -288,7 +320,7 @@ public class personaTest {
                 System.out.println("rfc valido");
             }
         } catch (Exception e) {
-            System.out.println("Ingresa un rfc valido (En Mayúsculas) por favor");
+            System.out.println("Ingresa un rfc valido (13 caracteres, solo mayúsculas y numeros), por favor");
             RegistroRfc();
         }
     }
@@ -306,72 +338,72 @@ public class personaTest {
     
     public static void RegistroNSS(){
         try {
-            System.out.println("Ingrese el NSS (Número de Seguro Social):");
+            System.out.println("Ingrese el NSS (Número de Seguro Social), son 11 numeros:");
             Scanner ii = new Scanner(System.in);
             NSS = ii.nextLine();
             if(!ValidarNSS(NSS)){
-                System.out.println("\nIngresa un NSS valido (11 digitos) por favor");
+                System.out.println("\nIngresa un NSS valido (11 numeros) por favor");
                 RegistroNSS();
             }
             else if(ValidarNSS(NSS)){
                 System.out.println("NSS valido");
             }
         } catch (Exception e) {
-            System.out.println("Ingresa un NSS valido (11 digitos) por favor");
+            System.out.println("Ingresa un NSS valido (11 numeros) por favor");
             RegistroNSS();
         }
     }
     
     public static void RegistroCurp(){
         try {
-            System.out.println("Ingrese el CURP:");
+            System.out.println("Ingrese el CURP (18 caracteres, solo mayúsculas y números) :");
             Scanner jj = new Scanner(System.in);
             curp = jj.nextLine();
             if(!ValidarCurp(curp)){
-                System.out.println("\nIngresa un Curp valido (18 digitos y Mayúsculas) por favor");
+                System.out.println("\nIngresa un Curp valido (18 caracteres, solo mayúsculas y números) por favor");
                 RegistroCurp();
             }
             else if(ValidarCurp(curp)){
                 System.out.println("Curp valido");
             }
         } catch (Exception e) {
-            System.out.println("Ingresa un Curp valido (18 digitos y Mayúsculas) por favor");
+            System.out.println("Ingresa un Curp valido (18 caracteres, solo mayúsculas y números) por favor");
             RegistroCurp();
         }
     }
     
     public static void RegistroAntiguedad(){
         try {
-            System.out.println("Ingrese la antigüedad:");
+            System.out.println("Ingrese la antigüedad (solo numero de años):");
             Scanner kk = new Scanner(System.in);
             antiguedad = kk.nextLine();
             if(!ValidarAntiguedad(antiguedad)){
-                System.out.println("\nIngresa una Antigüedad valida por favor");
+                System.out.println("\nIngresa una Antigüedad valida (solo numero de años), por favor");
                 RegistroAntiguedad();
             }
             else if(ValidarAntiguedad(antiguedad)){
                 System.out.println("Antigüedad valida");
             }
         } catch (Exception e) {
-            System.out.println("Ingresa una Antigüedad valida por favor");
+            System.out.println("Ingresa una Antigüedad valida (solo numero de años), por favor");
             RegistroAntiguedad();
         }
     }
     
     public static void RegistroPuesto(){
         try {
-            System.out.println("Ingrese el puesto:");
+            System.out.println("Ingrese el puesto (solo caracteres de A-Z):");
             Scanner ll = new Scanner(System.in);
             puesto = ll.nextLine();
             if(!ValidarPuesto(puesto)){
-                System.out.println("\nIngresa un Puesto valido por favor");
+                System.out.println("\nIngresa un Puesto valido (solo caracteres de A-Z), por favor");
                 RegistroPuesto();
             }
             else if(ValidarPuesto(puesto)){
                 System.out.println("Puesto valido");
             }
         } catch (Exception e) {
-            System.out.println("Ingresa un Puesto valido por favor");
+            System.out.println("Ingresa un Puesto valido (solo caracteres de A-Z), por favor");
             RegistroPuesto();
         }
     }
@@ -574,12 +606,16 @@ public class personaTest {
             
             System.out.println("Empleado ingresado a la Base de Datos");
             System.out.println("\n");
+            
+            MenuEmpleados();
         }
         
         else if(opcionSQL==2){
             System.out.println("consultar");
             empleadoDAO edao = new empleadoDAO();
             edao.seleccionar();
+            
+            MenuEmpleados();
                         
         }
         
@@ -601,6 +637,8 @@ public class personaTest {
         
             System.out.println("Empleado actualizado en la Base de Datos");
             System.out.println("\n");
+            
+            MenuEmpleados();
         }
         
         else if(opcionSQL==4){
@@ -617,6 +655,8 @@ public class personaTest {
         
             System.out.println("Empleado eliminado de la Base de Datos");
             System.out.println("\n");
+            
+            MenuEmpleados();
         }
         
         else if(opcionSQL==5){
@@ -626,7 +666,7 @@ public class personaTest {
         else{
             System.out.println("Inserte un valor válido");
         }
-        Mostrarmenu();
+        
     }
     
     public static void MenuClientes(){
@@ -648,12 +688,16 @@ public class personaTest {
             
             System.out.println("Cliente ingresado a la Base de Datos");
             System.out.println("\n");
+            
+            MenuClientes();
         }
         
         else if(opcionSQL==2){
             System.out.println("consultar");
             clienteDAO cdao = new clienteDAO();
             cdao.seleccionar();
+            
+            MenuClientes();
             
         }
         
@@ -674,6 +718,8 @@ public class personaTest {
                     
             System.out.println("Cliente actualizado en la Base de Datos");
             System.out.println("\n");
+            
+            MenuClientes();
         }
         
         else if(opcionSQL==4){
@@ -690,6 +736,8 @@ public class personaTest {
         
             System.out.println("Cliente eliminado de la Base de Datos");
             System.out.println("\n");
+            
+            MenuClientes();
         }
         
         else if(opcionSQL==5){
@@ -699,7 +747,7 @@ public class personaTest {
         else{
             System.out.println("Inserte un valor válido");
         }
-        Mostrarmenu();
+        
     }
         
     public static void MenuProveedores(){
@@ -720,6 +768,8 @@ public class personaTest {
             
             System.out.println("Proveedor ingresado a la Base de Datos");
             System.out.println("\n");
+            
+            MenuProveedores();
         }
         
         else if(opcionSQL==2){
@@ -727,6 +777,7 @@ public class personaTest {
             proveedorDAO pdao = new proveedorDAO();
             pdao.seleccionar();
             
+            MenuProveedores();
         }
         
         else if(opcionSQL==3){
@@ -747,6 +798,7 @@ public class personaTest {
             System.out.println("Proveedor actualizado en la Base de Datos");
             System.out.println("\n");
             
+            MenuProveedores();
         }
         
         else if(opcionSQL==4){
@@ -763,6 +815,8 @@ public class personaTest {
         
             System.out.println("Proveedor eliminado de la Base de Datos");
             System.out.println("\n");
+            
+            MenuProveedores();
         }
         
         else if(opcionSQL==5){
@@ -772,7 +826,7 @@ public class personaTest {
         else{
             System.out.println("Inserte un valor válido");
         }
-        Mostrarmenu();
+        
     }
     
     public static void main(String[] args) {
